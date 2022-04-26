@@ -1,4 +1,4 @@
-const M_appointment = require('../model/M_appointment')
+// const M_appointment = require('../model/M_appointment')
 
 const testFunc = (req, res, next)=>{
     console.log(req.body);

@@ -7,7 +7,6 @@ const storeClient = async (db) => {
 };
 
 
-
 const getSearchResult = async () => {
   const db = getDb();
 
@@ -17,8 +16,9 @@ const getSearchResult = async () => {
     return data
 };
 
+
  const insertSearchResult = async () => {
-  const db = getDb();
+  const db = await getDb();
   data = [
     {
       img: "https://links.papareact.com/xqj",
@@ -105,9 +105,14 @@ const getSearchResult = async () => {
       lat: 51.521245,
     },
   ];
-  await db.collection("searchResult").insertMany(data);
+
+  db.collection("places").insertMany(data);
 };
 
-// insertSearchResult()
+
+
+
+
+
 exports.insertSearchResult = insertSearchResult
 exports.getSearchResult = getSearchResult

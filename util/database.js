@@ -6,7 +6,7 @@ const MongoClient = mongodb.MongoClient;
 
 
 const mongoConnect = (callback) => {
-   return MongoClient.connect('mongodb+srv://admin:admin@carappointment.wo0dp.mongodb.net/carAppointment?retryWrites=true&w=majority', { useUnifiedTopology: true })
+   return MongoClient.connect('mongodb+srv://admin:admin@lodgingmarketplace.acemt.mongodb.net/lodgingMarketplace?retryWrites=true&w=majority', { useUnifiedTopology: true })
         .then(clientObj => {
             console.log("database is connected!");
             _db = clientObj.db(); // returns the database 
