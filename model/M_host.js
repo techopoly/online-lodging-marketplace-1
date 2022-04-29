@@ -46,7 +46,7 @@ const fetchPlaceList = async(email) =>{
     const db = getDb();
     const email = email
     const result = await db.collection("places")
-    .find({email: email }).toArray()
+    .find({bookedBy: email }).toArray()
     return result
 }
 

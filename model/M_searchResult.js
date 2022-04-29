@@ -101,48 +101,6 @@ const insertSearchResult = async () => {
     },
   ];
 
-  data2 = {
-    place: "Secondary Unit",
-    propertyType: "Serviced apartment",
-    listingType: "A private room",
-    location: {
-      latitude: 23.78433474056456,
-      longitude: 90.36918142592657,
-    },
-    address: {
-      street: "123",
-      aptSuite: "",
-      city: "Acity",
-      state: "London",
-      zipCode: "1222",
-      country: "United Kindom",
-    },
-    guests: 2,
-    beds: 3,
-    bathrooms: 4,
-    imageUrls: [
-      "https://firebasestorage.googleapis.com/v0/b/rent-space-f74e9.appspot.com/o/images%2F2.jpg8db7f3e1-c2f0-46ef-aa55-bdc7f62cec43?alt=media&token=c9df9426-730e-4939-9d04-2cc42063b09e",
-    ],
-    title: "A nice cozy place to spend time",
-    amenitiesArray: ["", "Hot tub", "", "", "Fire pit", "", "", "", ""],
-    guestFavoritesArray: [
-      "",
-      "",
-      "",
-      "",
-      "Free parking on premises",
-      "",
-      "",
-      "",
-      "",
-    ],
-    safetyItemsArray: ["", "", "Carbon monoxide", "", ""],
-    description:
-      "3 guest · 1 bedroom · 1 bed · 1.5 shared bthrooms · Wifi · Kitchen · Free parking · Washing Machine",
-    price: "1",
-    hostedBy: "tasin@gmail.com",
-  };
-
   const data3 = {
     place: "Unique Space",
     propertyType: "Vacation home",
