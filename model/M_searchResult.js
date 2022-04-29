@@ -1,23 +1,18 @@
 const getDb = require("../util/database").getDb;
 
-
-
 const storeClient = async (db) => {
   await db.collection("client").insertOne(this);
 };
 
-
 const getSearchResult = async () => {
   const db = getDb();
 
-  let data = await db.collection("places")
-    .find().toArray()
-    console.log(data)
-    return data
+  let data = await db.collection("places").find().toArray();
+  console.log(data);
+  return data;
 };
 
-
- const insertSearchResult = async () => {
+const insertSearchResult = async () => {
   const db = await getDb();
   data = [
     {
@@ -107,70 +102,96 @@ const getSearchResult = async () => {
   ];
 
   data2 = {
-    "place": "Secondary Unit",
-    "propertyType": "Serviced apartment",
-    "listingType": "A private room",
-    "location": {
-        "latitude": 23.78433474056456,
-        "longitude": 90.36918142592657
+    place: "Secondary Unit",
+    propertyType: "Serviced apartment",
+    listingType: "A private room",
+    location: {
+      latitude: 23.78433474056456,
+      longitude: 90.36918142592657,
     },
-    "address": {
-        "street": "123",
-        "aptSuite": "",
-        "city": "Acity",
-        "state": "London",
-        "zipCode": "1222",
-        "country": "United Kindom"
+    address: {
+      street: "123",
+      aptSuite: "",
+      city: "Acity",
+      state: "London",
+      zipCode: "1222",
+      country: "United Kindom",
     },
-    "guests": 2,
-    "beds": 3,
-    "bathrooms": 4,
-    "imageUrls": [
-        "https://firebasestorage.googleapis.com/v0/b/rent-space-f74e9.appspot.com/o/images%2F2.jpg8db7f3e1-c2f0-46ef-aa55-bdc7f62cec43?alt=media&token=c9df9426-730e-4939-9d04-2cc42063b09e"
+    guests: 2,
+    beds: 3,
+    bathrooms: 4,
+    imageUrls: [
+      "https://firebasestorage.googleapis.com/v0/b/rent-space-f74e9.appspot.com/o/images%2F2.jpg8db7f3e1-c2f0-46ef-aa55-bdc7f62cec43?alt=media&token=c9df9426-730e-4939-9d04-2cc42063b09e",
     ],
-    "title": "A nice cozy place to spend time",
-    "amenitiesArray": [
-        "",
-        "Hot tub",
-        "",
-        "",
-        "Fire pit",
-        "",
-        "",
-        "",
-        ""
+    title: "A nice cozy place to spend time",
+    amenitiesArray: ["", "Hot tub", "", "", "Fire pit", "", "", "", ""],
+    guestFavoritesArray: [
+      "",
+      "",
+      "",
+      "",
+      "Free parking on premises",
+      "",
+      "",
+      "",
+      "",
     ],
-    "guestFavoritesArray": [
-        "",
-        "",
-        "",
-        "",
-        "Free parking on premises",
-        "",
-        "",
-        "",
-        ""
+    safetyItemsArray: ["", "", "Carbon monoxide", "", ""],
+    description:
+      "3 guest · 1 bedroom · 1 bed · 1.5 shared bthrooms · Wifi · Kitchen · Free parking · Washing Machine",
+    price: "1",
+    hostedBy: "tasin@gmail.com",
+  };
+
+  const data3 = {
+    place: "Unique Space",
+    propertyType: "Vacation home",
+    listingType: "A private room",
+    location: {
+      latitude: { $numberDouble: "23.769992659990976" },
+      longitude: { $numberDouble: "90.36404710898364" },
+    },
+    address: {
+      street: "fsdf",
+      aptSuite: "",
+      city: "dsaf",
+      state: "",
+      zipCode: "",
+      country: "adsfsd",
+    },
+    guests: { $numberInt: "4" },
+    beds: { $numberInt: "5" },
+    bathrooms: { $numberInt: "2" },
+    imageInfo: [
+      {
+        url: "https://firebasestorage.googleapis.com/v0/b/rent-space-f74e9.appspot.com/o/images%2FHomepolish-interior-design-40053-5b896fbbc9e77c0050236fde.jpg8fb9ec14-594f-45c5-a7a0-c2e11e576dc2?alt=media&token=8f26fa85-7ec4-4b43-996d-d1efe4badfd4",
+        fileName:
+          "images/Homepolish-interior-design-40053-5b896fbbc9e77c0050236fde.jpg8fb9ec14-594f-45c5-a7a0-c2e11e576dc2",
+      },
     ],
-    "safetyItemsArray": [
-        "",
-        "",
-        "Carbon monoxide",
-        "",
-        ""
+    title: "dfasfasdf",
+    amenitiesArray: "dfasfasdf",
+    guestFavoritesArray: [
+      "",
+      "",
+      "Kitchen",
+      "",
+      "",
+      "Paid parking on premises",
+      "",
+      "",
+      "",
     ],
-    "description": "3 guest · 1 bedroom · 1 bed · 1.5 shared bthrooms · Wifi · Kitchen · Free parking · Washing Machine",
-    "price": "1",
-    "hostedBy": "tasin@gmail.com"
-}
+    safetyItemsArray: ["", "First aid kit", "", "", ""],
+    description: "dsfsdf sg dasfdf",
+    price: "800",
+    hostedBy: "ishmam@gmail.com",
+    bookedBy: "tasin@gmail.com"
+  };
 
   // db.collection("places").insertMany(data);
-  db.collection("places").insertOne(data2);
+  db.collection("places").insertOne(data3);
 };
 
-
-
-
-
-
-exports.insertSearchResult = insertSearchResult
-exports.getSearchResult = getSearchResult
+exports.insertSearchResult = insertSearchResult;
+exports.getSearchResult = getSearchResult;

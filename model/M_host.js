@@ -41,10 +41,10 @@ const fetchSinglePlace = async(id) =>{
     return result
 }
 
-const fetchPlaceList = async() =>{
+const fetchPlaceList = async(email) =>{
     //suppose we get the email from token and then query data base using that token
     const db = getDb();
-    const email = 'tasin@gmail.com'
+    const email = email
     const result = await db.collection("places")
     .find({email: email }).toArray()
     return result

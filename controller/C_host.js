@@ -27,7 +27,8 @@ const fetchSinglePlace = async (req, res, next)=>{
 
 const fetchPlaceList = async (req, res, next)=>{
     console.log(req.body)
-    const placeList = await M_host.fetchPlaceList()
+    email = req.body.email
+    const placeList = await M_host.fetchPlaceList(email)
     res.status(200).json({
         data: placeList
       });
