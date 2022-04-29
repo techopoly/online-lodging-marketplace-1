@@ -14,6 +14,7 @@ router.post('/client/create/appointment', C_appointment.createAppointment)
 router.get('/admin/appoinments', C_appointment.getAllAppointmentsAdmin)
 router.post('admin/appointment/update', C_appointment.updateAppointmentAdmin)
 router.get('client/appointments', C_appointment.getAllAppointmentsClient)
+
 router.get('/searchResult', C_searchResult.getSearchResult)
 router.post('/addPlace', C_host.addPlace)
 router.post('/editPlace', C_host.editPlace)

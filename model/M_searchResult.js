@@ -10,7 +10,7 @@ const storeClient = async (db) => {
 const getSearchResult = async () => {
   const db = getDb();
 
-  let data = await db.collection("searchResult")
+  let data = await db.collection("places")
     .find().toArray()
     console.log(data)
     return data
