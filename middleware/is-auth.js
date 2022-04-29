@@ -15,7 +15,7 @@ module.exports= (req,res,next)=>{
     if(!decodedToken){
         console.log('not authenticated')
     }
-
+    console.log("Decoded : ",decodedToken)
     req.email = decodedToken.email;
     next()
 }

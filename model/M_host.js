@@ -59,8 +59,8 @@ const fetchHostedPlaceList = async(email) =>{
 
 exports.createPlace = createPlace;
 exports.editPlace = editPlace
-exports.fetchSinglePlace = fetchSinglePlace
-exports.fetchBookedPlaceList = fetchBookedPlaceList
+exports.fetchSinglePlace = fetchSinglePlace 
+exports.fetchBookedPlaceList = fetchBookedPlaceList 
 exports.fetchHostedPlaceList = fetchHostedPlaceList
 
 

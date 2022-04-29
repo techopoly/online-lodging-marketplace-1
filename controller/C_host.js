@@ -1,4 +1,5 @@
 const M_host = require("../model/M_host");
+const getDb = require("../util/database").getDb;
 
 const addPlace = async (req, res, next) => {
   console.log(req.body);
@@ -27,17 +28,65 @@ const fetchSinglePlace = async (req, res, next) => {
 
 const fetchHostedPlaceList = async (req, res, next) => {
   console.log(req.body);
-  email = req.body.email;
-  const placeList = await M_host.fetchHostedPlaceList(email);
+  email = req.email;
+  let loadedUser;
+  const db = getDb();
+  await db
+    .collection("user")
+    .find({ email: email })
+    .next()
+    .then((user) => {
+      if (!user) {
+        const error = new Error("No user with this email ID");
+        error.statusCode = 401;
+        throw error;
+      }
+      console.log(user)
+      loadedUser = user;
+      console.log("user exits");
+      return user;
+    })
+    .catch((err) => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+  const placeList = await M_host.fetchHostedPlaceList(loadedUser.email);
   res.status(200).json({
     data: placeList,
   });
 };
 
 const fetchBookedPlaceList = async (req, res, next) => {
-  console.log(req.body);
-  email = req.body.email;
-  const placeList = await M_host.fetchBookedPlaceList(email);
+  // console.log(req.body);
+  email = req.email;
+  console.log("email: ",req.email)
+  let loadedUser;
+  const db = getDb();
+  await db
+    .collection("user")
+    .find({ email: email })
+    .next()
+    .then((user) => {
+      if (!user) {
+        const error = new Error("No user with this email ID");
+        error.statusCode = 401;
+        throw error;
+      }
+      console.log(user)
+      loadedUser = user;
+      console.log("user exits");
+      return user;
+    })
+    .catch((err) => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+  console.log('loadedUser:', loadedUser.email)
+  const placeList = await M_host.fetchBookedPlaceList(loadedUser.email);
   res.status(200).json({
     data: placeList,
   });
