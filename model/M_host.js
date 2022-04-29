@@ -41,17 +41,27 @@ const fetchSinglePlace = async(id) =>{
     return result
 }
 
-const fetchPlaceList = async(email) =>{
+const fetchBookedPlaceList = async(email) =>{
     //suppose we get the email from token and then query data base using that token
     const db = getDb();
-    const email = email
     const result = await db.collection("places")
     .find({bookedBy: email }).toArray()
     return result
 }
 
+const fetchHostedPlaceList = async(email) =>{
+  //suppose we get the email from token and then query data base using that token
+  const db = getDb();
+  const result = await db.collection("places")
+  .find({hostedBy: email }).toArray()
+  return result
+}
 
 exports.createPlace = createPlace;
 exports.editPlace = editPlace
 exports.fetchSinglePlace = fetchSinglePlace
-exports.fetchPlaceList = fetchPlaceList
+exports.fetchBookedPlaceList = fetchBookedPlaceList
+exports.fetchHostedPlaceList = fetchHostedPlaceList
+
+
+ 
