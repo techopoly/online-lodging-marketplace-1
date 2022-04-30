@@ -57,11 +57,25 @@ const fetchHostedPlaceList = async(email) =>{
   return result
 }
 
+const bookPlace = async(id, email) => {
+  const db = getDb();
+  const result = await db.collection("places").updateOne(
+    { _id: new mongodb.ObjectId(id)},
+    {
+      $set: {
+        bookedBy: email
+      },
+    }
+  );
+
+  return result
+}
+
 exports.createPlace = createPlace;
 exports.editPlace = editPlace
 exports.fetchSinglePlace = fetchSinglePlace 
 exports.fetchBookedPlaceList = fetchBookedPlaceList 
 exports.fetchHostedPlaceList = fetchHostedPlaceList
-
+exports.bookPlace = bookPlace
 
  

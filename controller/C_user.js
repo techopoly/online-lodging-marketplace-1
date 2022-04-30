@@ -35,6 +35,7 @@ const login = async (req, res, next) => {
       if (!isEqual) {
         const error = new Error("Wrong password");
         error.statusCode = 401;
+        res.status(400).json({ message: 'authentication failed'});
         throw error;
       }
       const token = jwt.sign({ email: loadedUser.email }, "privateKey", {
@@ -49,6 +50,8 @@ const login = async (req, res, next) => {
       next(err);
     });
 };
+
+
 
 exports.createUser = createUser;
 exports.login = login

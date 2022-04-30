@@ -87,10 +87,49 @@ const fetchBookedPlaceList = async (req, res, next) => {
     });
   console.log('loadedUser:', loadedUser.email)
   const placeList = await M_host.fetchBookedPlaceList(loadedUser.email);
+  console.log('placelist: ',placeList)
   res.status(200).json({
     data: placeList,
   });
 };
+
+
+const bookPlace = async (req, res, next) => {
+  // console.log(req.body);
+  email = req.email;
+  console.log("email: ",req.email)
+  let loadedUser;
+  const db = getDb();
+  await db
+    .collection("user")
+    .find({ email: email })
+    .next()
+    .then((user) => {
+      if (!user) {
+        const error = new Error("No user with this email ID");
+        error.statusCode = 401;
+        throw error;
+      }
+      console.log(user)
+      loadedUser = user;
+      console.log("user exits");
+      return user;
+    })
+    .catch((err) => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+  console.log('loadedUser:', loadedUser.email)
+  const bookedPlace = await M_host.bookPlace(id, email)
+  console.log('placelist: ',placeList)
+  res.status(200).json({
+    data: placeList,
+  });
+};
+
+
 
 exports.addPlace = addPlace;
 exports.editPlace = editPlace;
