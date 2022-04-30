@@ -24,7 +24,7 @@ router.post('/fetchBookedPlaceList', isAuth, C_host.fetchBookedPlaceList) // onl
 router.post('/createUser', C_user.createUser) 
 router.post('/fetchSinglePlace', C_host.fetchSinglePlace)
 router.post('/login', C_user.login )
-// router.post('/bookPlace', C_bookPlace)
+router.post('/bookPlace',isAuth, C_host.bookPlace)
 
 
 module.exports = router;

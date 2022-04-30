@@ -97,7 +97,10 @@ const fetchBookedPlaceList = async (req, res, next) => {
 const bookPlace = async (req, res, next) => {
   // console.log(req.body);
   email = req.email;
-  console.log("email: ",req.email)
+  id = req.body.id
+  checkIn = req.body.checkIn
+  checkOut = req.body.checkOut
+  console.log("email: ", req.email)
   let loadedUser;
   const db = getDb();
   await db
@@ -122,10 +125,10 @@ const bookPlace = async (req, res, next) => {
       next(err);
     });
   console.log('loadedUser:', loadedUser.email)
-  const bookedPlace = await M_host.bookPlace(id, email)
-  console.log('placelist: ',placeList)
+  const bookedPlace = await M_host.bookPlace(id, email,checkIn,checkOut)
+  console.log('bookedPlace: ', bookedPlace)
   res.status(200).json({
-    data: placeList,
+    data: bookedPlace,
   });
 };
 
@@ -136,3 +139,4 @@ exports.editPlace = editPlace;
 exports.fetchSinglePlace = fetchSinglePlace;
 exports.fetchBookedPlaceList = fetchBookedPlaceList;
 exports.fetchHostedPlaceList = fetchHostedPlaceList;
+exports.bookPlace = bookPlace

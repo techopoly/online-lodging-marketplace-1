@@ -63,7 +63,9 @@ const bookPlace = async(id, email) => {
     { _id: new mongodb.ObjectId(id)},
     {
       $set: {
-        bookedBy: email
+        bookedBy: email,
+        checkIn : checkIn,
+        checkOut : checkOut
       },
     }
   );
