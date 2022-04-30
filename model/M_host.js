@@ -11,7 +11,7 @@ const createPlace = async (data) => {
 };
 
 const editPlace = async (data) => {
-  const { id, title, description,price, location } = { ...data };
+  const { id, title, description,price} = { ...data };
   const db = getDb();
   const result = await db.collection("places").updateOne(
     { _id: new mongodb.ObjectId(id)},
@@ -19,8 +19,8 @@ const editPlace = async (data) => {
       $set: {
         title: title,
         description: description,
-        Price: price,
-        location: location
+        price: price,
+        
       },
     }
   );
@@ -73,11 +73,18 @@ const bookPlace = async(id, email) => {
   return result
 }
 
+const deleteHostedPlace = async(id) => {
+  const db = getDb();
+  const result = await db.collection("places").deleteOne( { _id: new mongodb.ObjectId(id)});
+  return result
+}
+
 exports.createPlace = createPlace;
 exports.editPlace = editPlace
 exports.fetchSinglePlace = fetchSinglePlace 
 exports.fetchBookedPlaceList = fetchBookedPlaceList 
 exports.fetchHostedPlaceList = fetchHostedPlaceList
 exports.bookPlace = bookPlace
+exports.deleteHostedPlace = deleteHostedPlace
 
  

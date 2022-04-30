@@ -25,6 +25,7 @@ router.post('/createUser', C_user.createUser)
 router.post('/fetchSinglePlace', C_host.fetchSinglePlace)
 router.post('/login', C_user.login )
 router.post('/bookPlace',isAuth, C_host.bookPlace)
+router.post('/deleteHostedPlace', C_host.deleteHostedPlace)
 
 
 module.exports = router;

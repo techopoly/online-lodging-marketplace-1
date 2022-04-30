@@ -132,6 +132,15 @@ const bookPlace = async (req, res, next) => {
   });
 };
 
+const deleteHostedPlace = async (req, res, next) => {
+  // console.log(req.body);
+  id = req.body.id
+  const deletedlace = await M_host.deleteHostedPlace(id)
+  res.status(200).json({
+    data: deletedlace,
+  });
+};
+
 
 
 exports.addPlace = addPlace;
@@ -140,3 +149,4 @@ exports.fetchSinglePlace = fetchSinglePlace;
 exports.fetchBookedPlaceList = fetchBookedPlaceList;
 exports.fetchHostedPlaceList = fetchHostedPlaceList;
 exports.bookPlace = bookPlace
+exports.deleteHostedPlace = deleteHostedPlace
