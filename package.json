@@ -6,10 +6,13 @@
     "nodemon": "^2.0.15"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node app.js",
-    "start dev":"nodemon app.js"
+    "start dev": "nodemon app.js"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^9.2.2",
+    "sinon": "^13.0.2"
   }
 }
-
-

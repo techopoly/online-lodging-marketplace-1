@@ -5,7 +5,6 @@ const getDb = require("../util/database").getDb;
 const createPlace = async (data) => {
   //img, location, title, description, price, long,lat
   const db = getDb();
-  const result = await db.collection("searchResult").insertOne(data);
   const result1 = await db.collection("places").insertOne(data);
   return result;
 };
