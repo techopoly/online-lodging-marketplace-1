@@ -26,6 +26,7 @@ const login = async (req, res, next) => {
       if (!user) {
         const error = new Error("No user with this email ID");
         error.statusCode = 401;
+        res.status(401).json({ message: 'authentication failed'});
         throw error;
       }
       loadedUser = user;
