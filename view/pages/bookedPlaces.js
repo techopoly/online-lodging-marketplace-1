@@ -1,22 +1,41 @@
-import { format } from 'date-fns';
-import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect, useState } from 'react'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import InfoCard from '../components/InfoCard';
-import MapArea from '../components/MapArea';
 import MenuModal from '../components/MenuModal';
 import LoginModal from '../components/LoginModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { uiActions } from '../store/ui-slice';
+import InfoCard from '../components/InfoCard';
 
 
-function Search({searchResults}) {
-  const router = useRouter();
+function BookedPlaces() {
+  const dispatch = useDispatch();
+  const stateLoggedIn = useSelector((state) => state.ui.token);
+  const [searchResults, setSearchResults] = useState([])
 
-  const { location, startDate, endDate, noOfGuests } = router.query;
 
-  const formattedStartDate = format(new Date(startDate), 'dd MMMM yy');
-  const formattedEndDate = format(new Date(endDate), 'dd MMMM yy');
-  const range = `${formattedStartDate} - ${formattedEndDate}`;
+  useEffect(() => {
+    const fetchBookedPlacesFn = async () => {
+      const res = await fetch(
+        'https://online-lodging-marketplace.herokuapp.com/fetchBookedPlaceList',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + stateLoggedIn
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          }
+        }
+      );
+  
+      const data = await res.json()
+      setSearchResults(data.data);
+    }
+    fetchBookedPlacesFn();
+   
+  }, [stateLoggedIn, dispatch, setSearchResults])
+
+  console.log(searchResults);
 
   return (
     <div className="">
@@ -24,16 +43,16 @@ function Search({searchResults}) {
       <MenuModal/>
       <LoginModal/>
 
-      <Header placeholder={`${location} | ${range} | ${noOfGuests} guests`} />
+      <Header />
 
       <main className="flex">
         <section className="flex-grow pt-14 px-6">
-          <p className="text-xs">
+          {/* <p className="text-xs">
             300+ Stays - {range}  for {noOfGuests} guests
           </p>
           <h1 className="text-3xl font-semibold mt-2 mb-6">
             Stays in {location}
-          </h1>
+          </h1> */}
 
           <div className="hidden  lg:inline-flex mb-5 space-x-3  text-gray-800 whitespace-nowrap">
             {/* button is a custom component of tailwind css */}
@@ -55,36 +74,19 @@ function Search({searchResults}) {
               star='4.5'
               price={item.price}
               total={item.price}
-              longitude={item.location.longitude}
-              latitude={item.location.latitude}
               id={item._id}
-              startDate={formattedStartDate}
-              endDate={formattedEndDate}
-              noOfGuests={noOfGuests}
               />)
             })}
           </div>
         </section>
         <section className='hidden xl:inline-flex xl:min-w-[600px]'>
-          <MapArea searchResults={searchResults} />
+          {/* <MapArea searchResults={searchResults} /> */}
         </section>
       </main>
       <Footer/>
     </div>
-  );
+  )
 }
 
-  
-export default Search;
+export default BookedPlaces;
 
-export async function getServerSideProps() {
-  // Fetch searchResults from external API
-  const res = await fetch(`https://online-lodging-marketplace.herokuapp.com/searchResult`)
-  const data = await res.json()
-  const searchResults = data.data
-
-  console.log(searchResults)
-
-  // Pass searchResults to the page via props
-  return { props: { searchResults } }
-}

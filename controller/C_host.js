@@ -2,7 +2,7 @@ const M_host = require("../model/M_host");
 const getDb = require("../util/database").getDb;
 
 const addPlace = async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const place = await M_host.createPlace(req.body);
     if (!place) {
@@ -25,7 +25,6 @@ const addPlace = async (req, res, next) => {
 };
 
 const editPlace = async (req, res, next) => {
-  console.log(req.body);
   try {
     const editedPlace = await M_host.editPlace(req.body);
     res.status(200).json({
@@ -42,7 +41,7 @@ const editPlace = async (req, res, next) => {
 };
 
 const fetchSinglePlace = async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   try{
     const singlePlace = await M_host.fetchSinglePlace(req.body.id);
   res.status(200).json({
@@ -59,7 +58,7 @@ const fetchSinglePlace = async (req, res, next) => {
 };
 
 const fetchHostedPlaceList = async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   email = req.email;
   let loadedUser;
   const db = getDb();

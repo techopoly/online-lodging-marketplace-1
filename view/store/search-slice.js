@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    selectLocation: {},
+    selectLocation: {
+        location: {longitude: '', latitude: ''}
+    },
+    searchDetails: {}
 }
 
 const searchSlice = createSlice({
@@ -10,6 +13,10 @@ const searchSlice = createSlice({
     reducers: {
         setSelectLocation(state, action) {
             state.selectLocation = action.payload
+        },
+
+        setSearchDetails(state, action) {
+            state.searchDetails = action.payload
         }
     }
 })

@@ -20,7 +20,6 @@ function Header({placeholder, onShowMenu}) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [noOfGuests, setNoOfGuests] = useState(1);
-  const [showMenu, setShowMenu] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
   const stateLogginIn = useSelector((state) => state.ui.userToken);
@@ -49,6 +48,9 @@ function Header({placeholder, onShowMenu}) {
     }
   }
 
+  const menuModalHandler = () => {
+    dispatch(uiActions.setShowMenuModal());
+  }
 
   const searchHandler = () => {
       router.push({
@@ -88,10 +90,9 @@ function Header({placeholder, onShowMenu}) {
       </div>
       {/* Right */}
       <div className="flex items-center space-x-4 justify-end text-gray-500">
-        <button onClick={BecomeAHostHandler} className="hidden md:inline cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-full hover:shadow-md">Become a host</button>
         <GlobeAltIcon className="h-6 cursor-pointer" />
 
-        <div onClick={() => setShowMenu(true)} className="flex items-center space-x-2 border-2 p-2 cursor-pointer rounded-full hover:bg-gray-100 hover:shadow-md">
+        <div onClick={menuModalHandler} className="flex items-center space-x-2 border-2 p-2 cursor-pointer rounded-full hover:bg-gray-100 hover:shadow-md">
           <MenuIcon className="h-6" />
           <UserCircleIcon className="h-6" />
         </div>
@@ -139,3 +140,4 @@ function Header({placeholder, onShowMenu}) {
 }
 
 export default Header;
+
